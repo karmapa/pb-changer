@@ -4,10 +4,11 @@ var numberAdding = process.argv[2];
 
 function PbNumberAdd(numberAdding) {
   this.numberAdding = Number(numberAdding);
-  this.fileName = fs.readdirSync('./originalText')[0];
+  this.fileName = fs.readdirSync('./originalText').filter(function(fileName) {
+    return !/^\./.test(fileName);
+  })[0];
   this.oldText = fs.readFileSync('./originalText/' + this.fileName, 'utf8');
   this.newText = '';
-
 }
 
 PbNumberAdd.prototype.addNumber = function() {
